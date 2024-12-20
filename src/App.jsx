@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { use } from 'react'
+import Grid from './components/Grid'
 
-const gridSize = 12
+const gridSize = 20
 
 const App = () => {
   const [snake, setSnake] = useState([[1, 1]])
@@ -11,8 +11,8 @@ const App = () => {
   const [touchStart, setTouchStart] = useState({x: 0, y: 0})
   const [currentScore, setCurrentScore] = useState(0)
   const [highestScore, setHighestScore] = useState(0)
-  const [color, setColor] = useState('gray')
-  const [snakeColor, setSnakeColor] = useState('green')
+  const [color, setColor] = useState('rgb(244 63 94)')
+  const [snakeColor, setSnakeColor] = useState('rgb(16 185 129)')
   const colors = ['rgb(249 115 22)', 'rgb(132 204 22)', 'rgb(16 185 129)', 'rgb(6 182 212)', 'rgb(99 102 241)', 'rgb(244 63 94)', 'rgb(217 70 239)']
 
   useEffect(() => {
@@ -178,7 +178,7 @@ const App = () => {
     <div className='flex flex-col items-center justify-center h-screen' onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div className='text-xl'>Highest Score: {highestScore}</div>
       <div className='my-2 text-xl text-teal-950'>Your Score: <p className='bg-teal-500 inline text-white px-1 rounded'>{currentScore}</p></div>
-      <div className={`grid grid-cols-12 w-[300px] h-[300px] border-2 border-stone-300 ${gameOver ? 'opacity-75` blur-sm pointer-events-none' : ''}`}>
+      <div style={{display: 'grid',	gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`}} className={`w-[300px] h-[300px] border-2 border-stone-300 ${gameOver ? 'opacity-75` blur-sm pointer-events-none' : ''}`}>
         {grid}
       </div>
       {gameOver && (
