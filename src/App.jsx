@@ -131,7 +131,10 @@ const App = () => {
     } while (snake.some(([x, y]) => x === newFood[0] && y === newFood[1]))
     setFood(newFood)
 
-    const randomColor = colors[Math.floor(Math.random() * colors.length)]
+    let randomColor
+    do {
+      randomColor = colors[Math.floor(Math.random() * colors.length)]
+    } while (randomColor === color)
     setColor(randomColor)
 
     setCurrentScore((score) => score + 5)
