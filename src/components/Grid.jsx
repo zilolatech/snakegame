@@ -4,8 +4,7 @@ import { GameContext } from './Context'
 const gridSize = 20
 
 const Grid = () => {
-  const {currentScore, setCurrentScore} = useContext(GameContext)
-  const {highestScore, setHighestScore} = useContext(GameContext)
+  const {currentScore, setCurrentScore, highestScore, setHighestScore, snakeColor, setSnakeColor} = useContext(GameContext)
 
   const [snake, setSnake] = useState([[1, 1]])
   const [food, setFood] = useState([5, 5])
@@ -13,7 +12,7 @@ const Grid = () => {
   const [gameOver, setGameOver] = useState(false)
   // const [touchStart, setTouchStart] = useState({x: 0, y: 0})
   const [color, setColor] = useState('rgb(244 63 94)')
-  const [snakeColor, setSnakeColor] = useState('rgb(16 185 129)')
+  // const [snakeColor, setSnakeColor] = useState('rgb(16 185 129)')
   const colors = ['rgb(249 115 22)', 'rgb(132 204 22)', 'rgb(16 185 129)', 'rgb(6 182 212)', 'rgb(99 102 241)', 'rgb(244 63 94)', 'rgb(217 70 239)']
   
 
@@ -142,18 +141,15 @@ const Grid = () => {
         }
       }
 
-      useEffect(() => {
-        if (currentScore > highestScore) {
-          updateHighestScore(currentScore)
-        }
-      }, [currentScore, highestScore])
-
       const restartGame = () => {
         setGameOver(false)
         setSnake([[1, 1]])
         setFood([5, 5])
         setDirection('RIGHT')
         setCurrentScore(0)
+        if (currentScore > highestScore) {
+          updateHighestScore(currentScore)
+        }
       }
     
       const grid = Array.from({length: gridSize * gridSize}, (_, idx) => {
