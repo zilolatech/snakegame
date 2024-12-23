@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Grid from './components/Grid'
 import Score from './components/Score'
 import { GameContext } from './components/Context'
+import Controller from './components/Controller'
 
 const App = () => {
   const {setCurrentScore, setSnakeColor, setSnake, food, setFood, direction, gameOver, setGameOver, color, setColor, gridSize} = useContext(GameContext)
@@ -71,6 +72,7 @@ const App = () => {
     <div className='flex flex-col items-center justify-center h-screen'>
       <Score />
       <Grid />
+      <Controller />
     </div>
   )
 }
