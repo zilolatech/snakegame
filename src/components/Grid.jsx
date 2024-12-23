@@ -1,40 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { GameContext } from './Context'
 
 
 const Grid = () => {
-  const {currentScore, setCurrentScore, highestScore, setHighestScore, snakeColor, setSnakeColor, snake, setSnake, food, setFood, direction, setDirection, gameOver, setGameOver, color, setColor, gridSize} = useContext(GameContext)
+  const {currentScore, setCurrentScore, highestScore, setHighestScore, snakeColor, snake, setSnake, food, setFood, direction, setDirection, gameOver, setGameOver, color, gridSize} = useContext(GameContext)
 
-  // const [snake, setSnake] = useState([[1, 1]])
-  // const [food, setFood] = useState([5, 5])
-  // const [direction, setDirection] = useState('RIGHT')
-  // const [gameOver, setGameOver] = useState(false)
   // const [touchStart, setTouchStart] = useState({x: 0, y: 0})
-  // const [color, setColor] = useState('rgb(244 63 94)')
-  // const [snakeColor, setSnakeColor] = useState('rgb(16 185 129)')
-  // const colors = ['rgb(249 115 22)', 'rgb(132 204 22)', 'rgb(16 185 129)', 'rgb(6 182 212)', 'rgb(99 102 241)', 'rgb(244 63 94)', 'rgb(217 70 239)']
   
-
-  
-
     useEffect(() => {
-        const handleKeyDown = (e) => {
-          if (gameOver) {
-            if (e.key === 'Enter') {
-              restartGame()
-            }
-            return
-          } 
-          if ((e.key === 'ArrowUp' || e.key === 'w') && direction !== 'DOWN') {
-            setDirection('UP')
-          } if ((e.key === 'ArrowDown' || e.key === 's') && direction !== 'UP') {
-            setDirection('DOWN')
-          } if ((e.key === 'ArrowLeft' || e.key === 'a') && direction !== 'RIGHT') {
-            setDirection('LEFT')
-          } if ((e.key === 'ArrowRight' || e.key === 'd') && direction !== 'LEFT') {
-            setDirection('RIGHT')
-          }
-        }
         window.addEventListener('keydown', handleKeyDown)
         return () => window.removeEventListener('keydown', handleKeyDown)
       }, [direction, gameOver])
@@ -68,7 +41,23 @@ const Grid = () => {
       //   }
       // }
 
-      
+      const handleKeyDown = (e) => {
+        if (gameOver) {
+          if (e.key === 'Enter') {
+            restartGame()
+          }
+          return
+        } 
+        if ((e.key === 'ArrowUp' || e.key === 'w') && direction !== 'DOWN') {
+          setDirection('UP')
+        } if ((e.key === 'ArrowDown' || e.key === 's') && direction !== 'UP') {
+          setDirection('DOWN')
+        } if ((e.key === 'ArrowLeft' || e.key === 'a') && direction !== 'RIGHT') {
+          setDirection('LEFT')
+        } if ((e.key === 'ArrowRight' || e.key === 'd') && direction !== 'LEFT') {
+          setDirection('RIGHT')
+        }
+      }
 
       const updateHighestScore = async (newScore) => {
         try {

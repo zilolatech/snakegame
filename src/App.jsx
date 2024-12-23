@@ -4,43 +4,44 @@ import Score from './components/Score'
 import { GameContext } from './components/Context'
 
 const App = () => {
-  const {currentScore, setCurrentScore, highestScore, setHighestScore, snakeColor, setSnakeColor, snake, setSnake, food, setFood, direction, setDirection, gameOver, setGameOver, color, setColor, gridSize} = useContext(GameContext)
+  const {setCurrentScore, setSnakeColor, setSnake, food, setFood, direction, gameOver, setGameOver, color, setColor, gridSize} = useContext(GameContext)
   const colors = ['rgb(249 115 22)', 'rgb(132 204 22)', 'rgb(16 185 129)', 'rgb(6 182 212)', 'rgb(99 102 241)', 'rgb(244 63 94)', 'rgb(217 70 239)']
 
   useEffect(() => {
-          if (gameOver) return
-          const moveSnake = () => {
-              setSnake((prevSnake) => {
-                const head = prevSnake[prevSnake.length - 1]
-                let newHead
-                if (direction === 'RIGHT') {
-                  newHead = [head[0], head[1] + 1]
-                } if (direction === 'LEFT') {
-                  newHead = [head[0], head[1] - 1]
-                } if (direction === 'UP') {
-                  newHead = [head[0] - 1, head[1]]
-                } if (direction === 'DOWN') {
-                  newHead = [head[0] + 1, head[1]]
-                } 
-              
-                const newSnake = [...prevSnake, newHead]
-                if (newHead[0] === food[0] && newHead[1] === food[1]) {
-                  generateFood(newSnake)
-                } else {
-                  newSnake.shift()
-                }
-    
-                if (isCollision(newHead, newSnake)) {
-                  setGameOver(true)
-                  return prevSnake
-                }
-    
-                return newSnake     
-          })}
+          if (gameOver) return         
     
           const interval = setInterval(moveSnake, 200)
           return () => clearInterval(interval)
       }, [direction, food, gameOver])
+
+      const moveSnake = () => {
+        setSnake((prevSnake) => {
+          const head = prevSnake[prevSnake.length - 1]
+          let newHead
+          if (direction === 'RIGHT') {
+            newHead = [head[0], head[1] + 1]
+          } if (direction === 'LEFT') {
+            newHead = [head[0], head[1] - 1]
+          } if (direction === 'UP') {
+            newHead = [head[0] - 1, head[1]]
+          } if (direction === 'DOWN') {
+            newHead = [head[0] + 1, head[1]]
+          } 
+        
+          const newSnake = [...prevSnake, newHead]
+          if (newHead[0] === food[0] && newHead[1] === food[1]) {
+            generateFood(newSnake)
+          } else {
+            newSnake.shift()
+          }
+
+          if (isCollision(newHead, newSnake)) {
+            setGameOver(true)
+            return prevSnake
+          }
+
+          return newSnake     
+    })}
 
       const isCollision = (head, snake) => {
         const [x, y] = head

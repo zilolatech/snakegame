@@ -6,17 +6,18 @@ const Score = () => {
     const {highestScore, setHighestScore, snakeColor} = useContext(GameContext)
 
     useEffect(() => {
-        const fetchHighestScore = async () => {
-          try {
-            const response = await fetch('http://localhost:8000/highest-score')
-            const data = await response.json()
-            setHighestScore(data.score)
-          } catch (error) {
-            console.error('Failed to fetch the highest score:', error)
-          }
-        }
         fetchHighestScore()
       }, [])
+
+      const fetchHighestScore = async () => {
+        try {
+          const response = await fetch('http://localhost:8000/highest-score')
+          const data = await response.json()
+          setHighestScore(data.score)
+        } catch (error) {
+          console.error('Failed to fetch the highest score:', error)
+        }
+      }
 
   return (
     <>
