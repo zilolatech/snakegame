@@ -69,7 +69,7 @@ const App = () => {
       }
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
+    <div className='flex flex-col items-center justify-center h-screen fixed inset-0'>
       <Score />
       <Grid />
       <Controller />
