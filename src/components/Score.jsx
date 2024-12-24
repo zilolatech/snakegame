@@ -22,7 +22,7 @@ const Score = () => {
   return (
     <>
         <div className='text-xl'>Highest Score: {highestScore}</div>
-        <div className='my-2 text-xl text-teal-950'>Your Score: <p className='bg-teal-500 inline text-white px-1 rounded'style={{backgroundColor: currentScore > 0 ? snakeColor : ''}}>{currentScore}</p></div> 
+        <div className='my-2 text-xl text-teal-950'>Your Score: <p className={`bg-teal-500 inline text-white px-1 rounded ${currentScore%100 == 0 && currentScore != 0 ? 'animated-score' : ''}`} style={{backgroundColor: currentScore > 0 ? snakeColor : ''}}>{currentScore}</p></div> 
     </>
   )
 }

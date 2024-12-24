@@ -65,7 +65,7 @@ const App = () => {
         } while (randomColor === color)
         setColor(randomColor)
     
-        setCurrentScore((score) => score + 5)
+        setCurrentScore((score) => score + 10)
       }
 
   return (
