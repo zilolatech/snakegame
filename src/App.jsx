@@ -15,6 +15,15 @@ const App = () => {
           return () => clearInterval(interval)
       }, [direction, food, gameOver])
 
+  useEffect(() => {
+    window.addEventListener('touchmove', preventSwipeReload, {passive: false})
+    return () => {
+      window.removeEventListener('touchmove', preventSwipeReload)
+    }
+  }, [])
+
+      const preventSwipeReload = (e) => e.preventDefault()
+
       const moveSnake = () => {
         setSnake((prevSnake) => {
           const head = prevSnake[prevSnake.length - 1]
